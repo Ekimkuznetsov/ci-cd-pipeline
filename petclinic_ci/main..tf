@@ -36,6 +36,15 @@ provider "google-beta" {
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
+# DEPLOY A PUBLIC INSTANCE IN GOOGLE CLOUD PLATFORM
+# ---------------------------------------------------------------------------------------------------------------------
+module "instance" {
+  source = "./modules/instance"
+  network  = module.vpc_network.network
+  subnetwork = module.vpc_network.private_subnetwork
+}
+
+# ---------------------------------------------------------------------------------------------------------------------
 # DEPLOY A PRIVATE CLUSTER IN GOOGLE CLOUD PLATFORM
 # ---------------------------------------------------------------------------------------------------------------------
 
@@ -69,16 +78,12 @@ module "gke_cluster" {
 
   # With a private cluster, it is highly recommended to restrict access to the cluster master
   # However, for testing purposes we will allow all inbound traffic.
-  master_authorized_networks_config = [
-    {
-      cidr_blocks = [
-        {
-          cidr_block   = "0.0.0.0/0"
-          display_name = "all-for-testing"
-        },
-      ]
-    },
-  ]
+  master_authorized_networks_config {
+     cidr_blocks {
+       cidr_block = module.vpc-network.private_subnetwork_cidr_block
+       display_name = "private"
+     }
+   }
 
   enable_vertical_pod_autoscaling = var.enable_vertical_pod_autoscaling
 
