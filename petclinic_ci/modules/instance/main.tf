@@ -13,5 +13,8 @@ resource "google_compute_instance" "jenkins" {
     network    = var.network
     subnetwork = var.subnetwork
     access_config {}
+    metadata = {
+    ssh-keys = "${var.user}:${file(var.publickeypath)}"
+  }
   }
 }
