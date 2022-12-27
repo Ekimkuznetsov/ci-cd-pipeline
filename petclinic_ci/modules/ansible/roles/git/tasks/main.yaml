@@ -1,7 +1,12 @@
 - name: install git
-  become: true
-  shell: sudo apt install git
+  ansible.builtin.apt:
+    name:
+      - git
+    state: latest
 
 - name: installing java
-  become: true
-  shell: sudo apt install openjdk-8-jdk -y
+  ansible.builtin.apt:
+    name:
+      - openjdk-8-jdk
+    state: present
+    
