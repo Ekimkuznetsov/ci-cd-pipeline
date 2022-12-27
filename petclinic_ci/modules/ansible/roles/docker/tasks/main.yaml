@@ -1,10 +1,16 @@
-- name: Install docker
-  become: true
-  shell: curl https://get.docker.com | sh
+- name: Install Docker
+  ansible.builtin.apt:
+    name:
+      - docker
+      - docker.io
+      - docker-registry
+    state: latest
 
 - name: Install pip
-  become: true
-  shell: sudo apt-get install python-pip -y
+  ansible.builtin.apt:
+    name: 
+      - python3-pip
+    state: present
 
 - name: Change privilege of docker
   become: true
@@ -20,7 +26,6 @@
   service:
     name: docker
     enabled: yes
-
 
 - name: Start service
   become: true
