@@ -12,6 +12,7 @@
     - git
     - geerlingguy.jenkins
     - docker
+    - maven-node-npm
   tasks:
   - name: configuring jenkins user
     command: sudo usermod -aG sudo jenkins
