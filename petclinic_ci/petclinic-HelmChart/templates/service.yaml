@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-lb
+  labels:
+    env: dev
+spec:
+  type: LoadBalancer
+  ports:
+  - name      : {{ .Release.Name }}-listener
+    protocol  : TCP
+    port      : 80 #Port on LoadBalancer
+    targetPort: 80 #Port on POD
+  selector:
+    project: {{ .Release.Name }}
+

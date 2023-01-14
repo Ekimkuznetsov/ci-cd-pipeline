@@ -168,3 +168,6 @@ https://www.youtube.com/watch?v=IluhOk86prA
 6. Nexus automated role with ansible:
 
 https://blog.sonatype.com/developing-an-ansible-role-for-nexus-repository-manager-v3.x
+
+7. Docker registry
+https://docs.docker.com/registry/deploying/

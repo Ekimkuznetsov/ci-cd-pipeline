@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petclinic-deployment
+  labels:
+     app: petclinic
+spec:
+  template:
+     metadata:
+       name: petclinic
+       labels: 
+         app: petclinic
+     spec:
+         containers:
+           - name: petclinic
+             image: ekimkuznetsov/petclinic:latest
+             imagePullPolicy: IfNotPresent
+             ports:
+               - containerPort: 8080
+         imagePullSecrets:
+             - name: dockerhubsecret
+  replicas: 1
+  selector:
+    matchLabels:
+      app: petclinic
+      
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: petclinic-service
+spec:
+  selector:
+    app: petclinic
+  type: LoadBalancer  
+  ports:
+    - protocol: TCP
+      targetPort: 3000
+      port: 80
+      nodePort: 30000

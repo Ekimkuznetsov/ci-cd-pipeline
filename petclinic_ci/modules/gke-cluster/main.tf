@@ -70,7 +70,20 @@ resource "google_container_cluster" "cluster" {
     cluster_secondary_range_name  = var.cluster_secondary_range_name
     services_secondary_range_name = var.services_secondary_range_name
   }
-
+  
+  # We will create 2 namespaces 
+  resource "kubernetes_namespace" "dev" {
+    metadata {
+      name = "dev"
+    }
+  }
+  
+  resource "kubernetes_namespace" "qa" {
+    metadata {
+      name = "qa"
+    }
+  }
+  
   # We can optionally control access to the cluster
   # See https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters
   private_cluster_config {
