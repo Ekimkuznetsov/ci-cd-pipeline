@@ -1,0 +1,8 @@
+project: qwiklabs-gcp-02-e93eeca48aba
+location: us-west1-b
+cluster_name: tf-gke-k8s
+service_account_file: "/home/mykhailo/Downloads/credentials.json"
+deployment_path: /home/mykhailo/EPAM/Final_Project/petclinic_12_17/petclinic_ci/petclinic-deployment.yaml
+auth_kind: serviceaccount
+scopes:
+  - https://www.googleapis.com/auth/compute

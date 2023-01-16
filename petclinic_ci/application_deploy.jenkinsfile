@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('execute Ansible') {
             steps {
-                ansiblePlaybook credentialsId: 'jenkins_to_on_prem', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'dev.inv', playbook: 'kubectl_ansible.yml'
+                ansiblePlaybook credentialsId: 'jenkins_to_on_prem', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'dev.inv', playbook: 'kubectl_ansible.yml', vaultCredentialsId: 'vault'	
             }
         }
     }
