@@ -1,4 +1,14 @@
-container:
-  image: ekimkuznetsov/petclinic:latest
+environment: development
+apphost: k8s
+label:
+  name: petclinic
 
-replicaCount: 2
+container:
+  image: ekimkuznetsov/petclinic
+  name: petclinic
+  pullPolicy: Always
+  namespace: dev
+  tagversion: latest
+
+
+replicaCount: 1

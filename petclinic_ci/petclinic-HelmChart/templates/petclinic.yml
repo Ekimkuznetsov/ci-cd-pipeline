@@ -1,22 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-deployment
+  name: {{ .Values.container.name }}-{{ .Release.Name }}-deployment
   labels:
-    app: {{ .Release.Name }}-deployment
+    app: {{ .Values.container.name }}
+  namespace: {{ .Values.container.namespace }}
+  
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      project: {{ .Release.Name }} #Service will look for thosw PODS labels
+      app: {{ .Values.container.name }} #Service will look for thows PODS labels
   template:
     metadata:
       labels:
-        project: {{ .Release.Name }}
+        app: {{ .Values.container.name }}
+        environment: {{ .Values.environment }}
     spec:
       containers:
-      - name: {{ .Release.Name }}-petclinic
-        image: {{ .Values.container.image }}
+      - name: {{ .Values.container.name }}
+        image: {{ .Values.container.image }}:{{ .Values.container.tagversion }}
+        imagePullPolicy: {{ .Values.container.pullPolicy }}
         ports:
         - containerPort: 80
+        env:
+          - name: appenvironment
+            value: {{ .Values.environment }}
 
