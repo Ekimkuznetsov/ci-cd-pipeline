@@ -1,0 +1,14 @@
+environment: development
+apphost: k8s
+label:
+  name: petclinic
+
+container:
+  image: ekimkuznetsov/petclinic
+  name: petclinic
+  pullPolicy: Always
+  namespace: dev
+  tagversion: latest
+
+
+replicaCount: 1

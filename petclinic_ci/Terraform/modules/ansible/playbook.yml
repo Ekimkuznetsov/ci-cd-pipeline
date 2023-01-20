@@ -1,0 +1,29 @@
+---
+- name: Update all packages  
+  hosts: all
+  become: true
+  tasks:
+  - name: updating packages
+    command: sudo apt-get update -y
+
+- hosts: jenkins
+  become: true
+  roles:
+    - git
+    - geerlingguy.jenkins
+    - docker
+    - maven-node-npm
+  tasks:
+  - name: configuring jenkins user
+    command: sudo usermod -aG sudo jenkins
+  - name: Installing Kubectl
+    command: "{{item}}"
+    with_items:
+     - sudo apt-get install -y kubectl
+
+- hosts: jenkins    
+  become: true
+  tasks:
+  - name: Installing SSHPASS  
+    command: sudo apt-get install sshpass
+
