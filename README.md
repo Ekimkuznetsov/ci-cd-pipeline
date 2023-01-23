@@ -180,7 +180,9 @@ In the second version I have plan to separate Jenkinsfile on two Jenkinsfiles.
 First Jenkinsfile will do all of the steps, except Deployment to the cubernetes.
 I will use second Jenkinsfile, which will be parametrized pipeline with the options to deploy to special environment ("DEV" or "QA") which will be located in the different namespaces of my cluster. Also it will be possible to chose the version of the artifact to deploy. It should be done by the **HELM CHART**s.
 
-
+# My repos:
+Application code: https://github.com/Ekimkuznetsov/spring-petclinic
+Automation code: https://git.epam.com/mykhailo_kuznietsov/petclinic_ci
 
 
 ## Resourses:
