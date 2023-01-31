@@ -18,6 +18,11 @@ variable "region" {
   type        = string
 }
 
+variable "gcp-creds" {
+  description = "Credentials path for service account"
+  default = "/usr/local/bin/credentials.json"
+}
+
 # ---------------------------------------------------------------------------------------------------------------------
 # OPTIONAL PARAMETERS
 # These parameters have reasonable defaults.

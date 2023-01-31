@@ -1,26 +1,16 @@
 pipeline {
     agent any
-    options{
-        buildDiscarder(logRotator(numToKeepStr: '5', daysToKeepStr: '5'))
-        timestamps()
-    }
-    
-    environment {
-        PROJECT_ID = 'qwiklabs-gcp-02-e107de3da2b1'
-        CLUSTER_NAME = 'scaling-demo'
-        LOCATION = 'us-central1-a'
-        CREDENTIALS_ID = 'kubernetes'
-    }
+
     stages {
-        stage('Deploy to K8s') {
+        stage('Deploy to K8s with HELM') {
 	    steps{
-		echo "Deployment started ..."
+		echo "HELM Deployment started ..."
 	        sh 'ls -ltr'
 		sh 'pwd'
-		sh "sed -i 's/tagversion/${env.BUILD_ID}/g' petclinic-deployment.yaml"
-		echo "Starting deployment of deployment.yaml"
-		step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'petclinic-deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
-		echo "Deployment Finished ..."
+		sh "sed -i 's/tagversion/${params.DOCKER_IMAGE_TAG}/g' ./petclinic-HelmChart/values.yaml"
+		sh "sed -i 's/namespase/${params.NAMESPACE_ENV}/g' ./petclinic-HelmChart/values.yaml"
+		echo "Starting deployment of HELM"
+		sh 'helm upgrade petclinic-HelmChart petclinic-HelmChart/ --namespace ${params.NAMESPACE_ENV}' 
             }
 	}
     }

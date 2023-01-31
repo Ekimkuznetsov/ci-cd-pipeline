@@ -15,7 +15,6 @@ spec:
     metadata:
       labels:
         app: {{ .Values.container.name }}
-        environment: {{ .Values.environment }}
     spec:
       containers:
       - name: {{ .Values.container.name }}
@@ -23,7 +22,6 @@ spec:
         imagePullPolicy: {{ .Values.container.pullPolicy }}
         ports:
         - containerPort: 80
-        env:
-          - name: appenvironment
-            value: {{ .Values.environment }}
+      imagePullSecrets:
+          - name: {{ .Values.container.secret_file }} 
 

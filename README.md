@@ -177,11 +177,12 @@ I should use Declarative pipeline in my Jenkinsfile
 There should be 1-st version of the application
 
 In the second version I have plan to separate Jenkinsfile on two Jenkinsfiles. 
-First Jenkinsfile will do all of the steps, except Deployment to the cubernetes.
+First Jenkinsfile will do all of the steps, except Deployment to the Kubernetes.
 I will use second Jenkinsfile, which will be parametrized pipeline with the options to deploy to special environment ("DEV" or "QA") which will be located in the different namespaces of my cluster. Also it will be possible to chose the version of the artifact to deploy. It should be done by the **HELM CHART**s.
 
 # My repos:
 Application code: https://github.com/Ekimkuznetsov/spring-petclinic
+
 Automation code: https://git.epam.com/mykhailo_kuznietsov/petclinic_ci
 
 
@@ -227,6 +228,12 @@ https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-regi
 
 12. Kubernetes troubleshooting
 https://hsto.org/webt/mc/sy/mg/mcsymgs-r_2zegnue4c1uvzcjmg.png
+
+13. Ansible. Google Cloud Platform Guide
+https://docs.ansible.com/ansible/latest/scenario_guides/guide_gce.html
+
+14. Ansible: Using Variables
+https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_variables.html#defining-simple-variables
 
 
 
