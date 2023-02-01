@@ -1,4 +1,3 @@
-environment: development
 apphost: k8s
 label:
   name: petclinic
@@ -7,8 +6,9 @@ container:
   image: ekimkuznetsov/petclinic
   name: petclinic
   pullPolicy: Always
-  namespace: dev
+  namespace: default
   tagversion: latest
+  secret_file: dockerhubsecret
 
 
 replicaCount: 1
